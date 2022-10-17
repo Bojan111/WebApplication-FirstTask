@@ -1,0 +1,4 @@
+Color, Number, Label
+Red,   43,    Gostivar
+
+Blue , 50 ,  Tetovo

@@ -1,0 +1,149 @@
+﻿@model IEnumerable<WebApplication_FirstTask.Models.TaskFormat>
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col col-12">
+            <div class="container mb-5">
+                <br /><br />
+              
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary list-panel" id="list-panel">
+                            <div class="row">
+                                <div class="col col-10">
+                                    <div class="panel-heading list-panel-heading">
+                                        <h1 class="panel-title list-panel-title">Format</h1>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="col text-right float-right">
+                                        <a asp-controller="Format" asp-action="Create" class="btn btn-success btn-sm"><i class="fa fa-plus-square-o"></i> &nbsp; Create Format</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="panel-body">
+                                <table id="assets-data-table" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Color</th>
+                                            <th>Number</th>
+                                            <th>Label</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Color</td>
+                                                <td>@item.Number</td>
+                                                <td>@item.Label</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-sm" asp-route-Id="@item.Id" asp-action="Details"><i class="fa fa-search"></i></a>
+                                                    <a class="btn btn-secondary btn-sm" asp-route-id="@item.Id" asp-action="Update"><i class="fa fa-edit"></i></a>
+                                                    <a class="btn btn-danger btn-sm" asp-route-Id="@item.Id" asp-action="Delete"><i class="fa fa-remove"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-10">
+
+            @*<p>
+                    <div class="row">
+                        <div class="col-1">
+                            <label><b>Chart-Type</b></label>
+                        </div>
+
+                        <div class="col-2">
+                            <select id="ChartType" class="form-control" style="width:150px">
+                                <option selected> Select Chart Type </option>
+                                <option>bar</option>
+                                <option>line</option>
+                                <option>pie</option>
+                                <option>doughnut</option>
+                            </select>
+                        </div>
+                    </div>
+                </p>*@
+
+            @*<input id="ID" value="Show Graph" type="button" />*@
+
+            <canvas id="myChart" style="max-width:700px; max-height:430px"></canvas>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            <script type="text/javascript">$(function () {
+
+                    $(document).ready(function () {
+
+                        //var chartType = $("#ChartType").val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Format/GetFormatData",
+                            data: "",
+                            contextType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: OnSuccessResult,
+                            error: OnError
+                        });
+
+                        function OnSuccessResult(data) {
+
+                            var _data = data;
+
+                            var _chartColor = data[0]
+                            var _chartLabel = _data[1];
+                            var _chartNumber = _data[2];
+                            //var _chartLabel = _data[2];
+
+
+
+
+
+                            var barColor = _chartColor;
+
+                            new Chart("myChart",
+                                {
+                                    type: "pie",
+                                    data: {
+                                        labels: _chartLabel,
+                                        datasets: [{
+                                            backgroundColor: barColor,
+                                            data: _chartNumber
+                                        }]
+                                    }
+
+                                })
+
+
+
+                        }
+
+
+                        function OnError(err) {
+
+                        }
+                    });
+                });</script>
+
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,27 @@
+﻿@model WebApplication_FirstTask.Models.TaskFormat
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Format Details</h1>
+<table class="table table-bordered">
+    <tr>
+        <td>Id</td>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <td>Color</td>
+        <td>@Model.Color</td>
+    </tr>
+    <tr>
+        <td>Number</td>
+        <td>@Model.Number</td>
+    </tr>
+
+    <tr>
+        <td>Label</td>
+        <td>@Model.Label</td>
+    </tr>
+</table>
+
+<a class="btn btn-primary" asp-controller="Format" asp-action="Index">See all Formats</a>

@@ -1,0 +1,30 @@
+﻿@model WebApplication_FirstTask.Models.TaskFormat
+@{
+    ViewData["Title"] = "Update";
+}
+
+<form method="post" asp-action="Update">
+    <input type="hidden" asp-action="Update" asp-for="Id" />
+    <div class="form-row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group col-sm-4">
+            <label asp-for="Color"></label>
+            <input type="color" class="form-control" asp-for="Color" />
+            <span class="text-danger" asp-validation-for="Color"></span>
+        </div>
+
+        <div class="form-group col-sm-4">
+            <label asp-for="Number"></label>
+            <input class="form-control" asp-for="Number" />
+            <span class="text-danger" asp-validation-for="Number"></span>
+        </div>
+
+        <div class="form-group col-sm-4">
+            <label asp-for="Label"></label>
+            <input class="form-control" asp-for="Label" />
+            <span class="text-danger" asp-validation-for="Label"></span>
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
